@@ -1,0 +1,13 @@
+eardh-gateway:
+  microservice:
+    name: eardh-gateway-test-dubbo-provider
+    group: appTest1
+    description: 服务提供者
+    config:
+      gateway-registry: 127.0.0.1:8080
+      microservice-path: /test-dubbo-provider
+      protocol: tri
+      weight: 10
+    rpc-service-enable: true
+    registry-center-enable: true
+    report-enable: true

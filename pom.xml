@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.eardh</groupId>
+    <artifactId>eardh-gateway</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>eardh-gateway-common</module>
+        <module>eardh-gateway-core</module>
+        <module>eardh-gateway-center</module>
+        <module>eardh-gateway-sdk</module>
+        <module>eardh-gateway-test-dubbo-provider</module>
+        <module>eardh-gateway-server</module>
+        <module>eardh-gateway-spring-boot-starter</module>
+        <module>eardh-gateway-test-rest-provider</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <properties>
+        <eardh-gateway.version>1.0-SNAPSHOT</eardh-gateway.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <netty-all.version>4.1.79.Final</netty-all.version>
+        <junit-jupiter.version>5.9.2</junit-jupiter.version>
+        <dubbo.version>3.2.0-beta.6</dubbo.version>
+        <nacos-client.version>2.2.0</nacos-client.version>
+        <fastjson2.version>2.0.25</fastjson2.version>
+        <lombok.version>1.18.24</lombok.version>
+        <logback-classic.version>1.4.6</logback-classic.version>
+        <hutool-all.version>5.8.15</hutool-all.version>
+        <grpc-all.version>1.54.0</grpc-all.version>
+        <mysql-connector-java.version>8.0.31</mysql-connector-java.version>
+        <mybatis-plus-boot-starter.version>3.5.3.1</mybatis-plus-boot-starter.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty-all.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos-client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-all</artifactId>
+                <version>${grpc-all.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
+            </dependency>
+
+            <!--    定义了一些基本的rpc实体类及其他    -->
+            <dependency>
+                <groupId>com.eardh</groupId>
+                <artifactId>eardh-gateway-common</artifactId>
+                <version>${eardh-gateway.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.eardh</groupId>
+                <artifactId>eardh-gateway-core</artifactId>
+                <version>${eardh-gateway.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.eardh</groupId>
+                <artifactId>eardh-gateway-spring-boot-starter</artifactId>
+                <version>${eardh-gateway.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.eardh</groupId>
+                <artifactId>eardh-gateway-sdk</artifactId>
+                <version>${eardh-gateway.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

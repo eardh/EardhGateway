@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eardh.gateway.center.mapper.rpc.rest.RestInterfaceMapper">
+
+    <resultMap id="restMap" type="com.eardh.gateway.center.model.aggregator.RestRoute">
+        <result column="id" property="id"/>
+        <result column="api_id" property="apiId"/>
+        <result column="microservice_id" property="microserviceId"/>
+        <result column="microservice_name" property="microserviceName"/>
+        <result column="microservice_group" property="microserviceGroup"/>
+        <result column="microservice_description" property="microserviceDescription"/>
+        <result column="rest_url" property="restUrl"/>
+        <result column="rest_method" property="restMethod"/>
+        <result column="rest_parameters_type" property="restParametersType"/>
+        <result column="rest_parameters_name" property="restParametersName"/>
+        <result column="rest_result_type" property="restResultType"/>
+        <result column="rest_description" property="restDescription"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectPage" resultMap="restMap">
+        select a.microservice_id, a.microservice_name, a.microservice_group, a.microservice_description,
+               b.rest_parameters_type, b.rest_parameters_name, b.rest_result_type, b.id, b.rest_url,b.rest_method, b.rest_description, b.api_id, b.create_time, b.update_time
+        from micro_service a, rest_interface b
+        <where>
+            <if test="true">
+                a.microservice_id = b.microservice_id
+            </if>
+            <if test="requireApiId">
+                and b.api_id is not null
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByApiId" resultMap="restMap">
+        select a.microservice_id, a.microservice_name, a.microservice_group, a.microservice_description,
+               b.rest_parameters_type, b.rest_parameters_name, b.rest_result_type, b.id, b.rest_url,b.rest_method, b.rest_description, b.api_id, b.create_time, b.update_time
+        from micro_service a, rest_interface b
+        where b.api_id = #{apiId} and a.microservice_id = b.microservice_id
+    </select>
+    <select id="selectByMicroserviceId" resultMap="restMap">
+        select a.microservice_id, a.microservice_name, a.microservice_group, a.microservice_description,
+               b.rest_parameters_type, b.rest_parameters_name, b.rest_result_type, b.id, b.rest_url,b.rest_method, b.rest_description, b.api_id, b.create_time, b.update_time
+        from micro_service a, rest_interface b
+        where b.microservice_id = #{microserviceId} and a.microservice_id = b.microservice_id
+    </select>
+</mapper>

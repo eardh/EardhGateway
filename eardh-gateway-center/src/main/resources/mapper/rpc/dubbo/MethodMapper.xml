@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eardh.gateway.center.mapper.rpc.dubbo.MethodMapper">
+
+    <resultMap id="routeMap" type="com.eardh.gateway.center.model.aggregator.DubboRoute">
+        <result column="api_id" property="apiId"/>
+        <result column="microservice_id" property="microserviceId"/>
+        <result column="microservice_name" property="microserviceName"/>
+        <result column="microservice_group" property="microserviceGroup"/>
+        <result column="microservice_description" property="microserviceDescription"/>
+        <result column="interface_id" property="interfaceId"/>
+        <result column="interface_name" property="interfaceName"/>
+        <result column="interface_group" property="interfaceGroup"/>
+        <result column="interface_description" property="interfaceDescription"/>
+        <result column="method_id" property="methodId"/>
+        <result column="method_name" property="methodName"/>
+        <result column="method_description" property="methodDescription"/>
+        <result column="method_parameters_type" property="methodParametersType"/>
+        <result column="method_parameters_name" property="methodParametersName"/>
+        <result column="method_result_type" property="methodResultType"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectByApiId" resultMap="routeMap">
+        select c.api_id, a.microservice_id, a.microservice_name, a.microservice_description, a.microservice_group,
+               b.interface_id, b.interface_name, b.interface_group, b.interface_description,
+               c.method_id, c.method_name, c.method_description, c.method_parameters_type, c.method_parameters_name,c.method_result_type, c.create_time, c.update_time
+        from micro_service a, dubbo_interface b, dubbo_method c
+        where c.api_id = #{apiId} and c.microservice_id = a.microservice_id and c.interface_id = b.interface_id;
+    </select>
+
+    <select id="selectPage" resultMap="routeMap">
+        select c.api_id, a.microservice_id, a.microservice_name, a.microservice_description, a.microservice_group,
+               b.interface_id, b.interface_name, b.interface_group, b.interface_description,
+               c.method_id, c.method_name, c.method_description, c.method_parameters_type, c.method_parameters_name,c.method_result_type, c.create_time, c.update_time
+        from micro_service a, dubbo_interface b, dubbo_method c
+        <where>
+            <if test="true">
+                c.microservice_id = a.microservice_id and c.interface_id = b.interface_id
+            </if>
+            <if test="requireApiId">
+                and c.api_id is not null
+            </if>
+        </where>
+    </select>
+    <select id="selectByMicroserviceIdIfInterfaceId" resultMap="routeMap">
+        select c.api_id, a.microservice_id, a.microservice_name, a.microservice_description, a.microservice_group,
+               b.interface_id, b.interface_name, b.interface_group, b.interface_description,
+               c.method_id, c.method_name, c.method_description, c.method_parameters_type, c.method_parameters_name,c.method_result_type, c.create_time, c.update_time
+        from micro_service a, dubbo_interface b, dubbo_method c
+        <where>
+            <if test="microserviceId != null">
+                a.microservice_id = #{microserviceId}
+            </if>
+            <if test="interfaceId != null">
+                and b.interface_id = #{interfaceId}
+            </if>
+            <if test="true">
+                and c.microservice_id = a.microservice_id and c.interface_id = b.interface_id
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,13 @@
+eardh-gateway:
+  microservice:
+    name: eardh-gateway-test-rest-provider
+    group: appTest1
+    description: 服务提供者
+    config:
+      microservice-path: /test-rest-provider
+      gateway-registry: 127.0.0.1:8080
+      protocol: http
+      weight: 10
+    rpc-service-enable: true
+    registry-center-enable: true
+    report-enable: true

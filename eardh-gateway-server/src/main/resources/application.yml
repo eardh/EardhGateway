@@ -1,0 +1,11 @@
+eardh-gateway:
+  gateway:
+    server:
+      port: 9527
+    register:
+      enable: true
+      gateway-name: eardh-gateway-g1
+      gateway-description: 流量网关
+      gateway-registry: 127.0.0.1:8080
+      group-name: test-group-1
+      enable-registry: true

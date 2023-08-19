@@ -1,0 +1,66 @@
+server:
+  port: 8080
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'eardh-gateway'
+      paths-to-match: '/**'
+      packages-to-scan: com.eardh.gateway.center.controller
+
+# knife4j的增强配置，不需要增强可以不配 https://doc.xiaominfo.com/docs/features/enhance
+knife4j:
+  enable: true
+  setting:
+    language: zh_CN
+    enable-swagger-models: true
+    enable-document-manage: true
+    swagger-model-name: 实体类列表
+    enable-version: false
+    enable-reload-cache-parameter: false
+    enable-after-script: true
+    enable-filter-multipart-api-method-type: POST
+    enable-filter-multipart-apis: false
+    enable-request-cache: true
+    enable-host: false
+    enable-host-text: 127.0.0.1:8080
+    enable-home-custom: true
+    home-custom-path: classpath:markdown/home.md
+    enable-search: true
+    enable-footer: true
+    enable-footer-custom: true
+    footer-custom-content: Apache License 2.0 | Copyright  2023-[Eardh](https://github.com/eardh)
+    enable-dynamic-parameter: true
+    enable-debug: true
+    enable-open-api: true
+    enable-group: true
+  cors: false
+  production: false
+  basic:
+    enable: false
+    username: test
+    password: 12313
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/eardh_gateway?useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      insert-strategy: ignored
+      update-strategy: ignored
+
+nacos:
+  address: 127.0.0.1:8848
+  data-id: gateway-center-config
+  group: center-group

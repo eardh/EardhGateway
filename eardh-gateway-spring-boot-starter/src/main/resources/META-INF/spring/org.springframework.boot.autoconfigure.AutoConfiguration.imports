@@ -1,0 +1,2 @@
+com.eardh.gateway.starter.configuration.GatewayServerAutoConfiguration
+com.eardh.gateway.starter.register.GatewayRegisterAutoConfiguration
